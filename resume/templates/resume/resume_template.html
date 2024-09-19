@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ contact.email }}'s Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .contact {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .contact p {
+            margin: 5px 0;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        h2 {
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .skills ul {
+            columns: 2;
+        }
+        .date {
+            float: right;
+        }
+        .clear {
+            clear: both;
+        }
+        .project-desc {
+            margin-top: 5px;
+        }
+        .sub-section {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>{{ contact.email }}</h1>
+
+        <div class="contact">
+            <p><strong>Email:</strong> {{ contact.email }}</p>
+            <p><strong>GitHub:</strong> <a href="{{ contact.github }}">{{ contact.github }}</a></p>
+            <p><strong>LinkedIn:</strong> <a href="{{ contact.linkedin }}">{{ contact.linkedin }}</a></p>
+            <p><strong>Location:</strong> {{ contact.location }}</p>
+        </div>
+
+        <div class="section education">
+            <h2>Education</h2>
+            <ul>
+                {% for edu in educations %}
+                <li>
+                    <strong>{{ edu.institution }}</strong>, {{ edu.location }} <span class="date">{{ edu.graduation_date }}</span><br>
+                    <em>{{ edu.degree }}</em><br>
+                    Relevant Coursework: {{ edu.coursework }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section experience">
+            <h2>Experience</h2>
+            <ul>
+                {% for exp in experiences %}
+                <li class="sub-section">
+                    <strong>{{ exp.company }}</strong>, {{ exp.location }} <span class="date">{{ exp.start_date }} - {{ exp.end_date }}</span><br>
+                    <em>{{ exp.position }}</em><br>
+                    <ul class="project-desc">
+                        {{ exp.responsibilities }}
+                    </ul>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section projects">
+            <h2>Projects</h2>
+            <ul>
+                {% for project in projects %}
+                <li class="sub-section">
+                    <strong>{{ project.title }}</strong> <span class="date">{{ project.date }}</span><br>
+                    {{ project.description }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="section skills">
+            <h2>Skills</h2>
+            <ul>
+                {% for skill in skills %}
+                <li>{{ skill.skill_name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
